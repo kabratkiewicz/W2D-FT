@@ -1,4 +1,18 @@
+% Author: Karol Abratkiewicz
+% karol.abratkiewicz@pw.edu.pl  
+% Warsaw University of technology
+% K.Abratkiewicz, M. K. Baczyk, P. Samczynski "Software-Oriented Adjustable
+% Concentration of ISAR Images -- Towards Super-Resolution", RadarConf 2025
+
 function [S_con] = W2DFT_LM(signal, NFFT_omega, NFFT_eta, mu)
+% inputs:
+% signal - two-dimensional time-domain signal
+% NFFT_omega, NFFT_eta - FFT size in the omega and eta frequency domain,
+%   respectively
+% mu - dump parameter
+% output:
+% S_con - concentrated bivariate spectrum
+
 N = size(signal,1);
 M = size(signal,2);
 

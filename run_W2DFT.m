@@ -1,3 +1,14 @@
+% Author: Karol Abratkiewicz
+% karol.abratkiewicz@pw.edu.pl  
+% Warsaw University of technology
+% K. Abratkiewicz, "Windowed Two-Dimensional Fourier Transform 
+% Concentration and Its Application to ISAR Imaging," in IEEE Transactions 
+% on Image Processing, vol. 32, pp. 6260-6273, 2023, 
+% doi: 10.1109/TIP.2023.3330603. 
+% 
+% This script concentrates the bivariate spectrum of the two-dimensional
+% time-domain signal
+
 close all
 clear
 clc

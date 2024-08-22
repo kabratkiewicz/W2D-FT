@@ -1,4 +1,22 @@
+% Author: Karol Abratkiewicz
+% karol.abratkiewicz@pw.edu.pl  
+% Warsaw University of technology
+% K. Abratkiewicz, "Windowed Two-Dimensional Fourier Transform 
+% Concentration and Its Application to ISAR Imaging," in IEEE Transactions 
+% on Image Processing, vol. 32, pp. 6260-6273, 2023, 
+% doi: 10.1109/TIP.2023.3330603. 
+
 function [W2DFT_wRwT, W2DFT_con] = W2DFT(signal, est, NFFT_omega, NFFT_eta)
+% inputs:
+% signal - two-dimensional time-domain signal
+% est - estimator number
+% NFFT_omega, NFFT_eta - FFT size in the omega and eta frequency domain,
+%   respectively
+% output:
+% W2DFT_wRwT - original windowed bivariate spectrum
+% W2DFT_con - concentrated bivariate spectrum
+
+
 N = size(signal,1);
 M = size(signal,2);
 omega_bins = (1 : NFFT_omega);

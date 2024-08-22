@@ -1,4 +1,23 @@
+% Author: Karol Abratkiewicz
+% karol.abratkiewicz@pw.edu.pl  
+% Warsaw University of technology
+% K. Abratkiewicz, "Multitaper ISAR Noise Suppression," in IEEE 
+% Transactions on Geoscience and Remote Sensing, vol. 62, pp. 1-13, 2024, 
+% Art no. 5217313, doi: 10.1109/TGRS.2024.3427397.
+
 function [W2DFT_wRwT, W2DFT_mean, W2DFT_con] = BivariateMultitaper(signal, M, sigmaT, sigmaR, NFFT_omega, NFFT_eta, avgtype)
+% inputs:
+% signal - two-dimensional time-domain signal
+% M - Hermite function order
+% sigmaT - window spread parameter in t
+% sigmaR - window spread parameter in r
+% NFFT_omega, NFFT_eta - FFT size in the omega and eta frequency domain,
+%   respectively
+% avgtype - averaging type: 'noncoherent' and 'coherent'
+% output:
+% W2DFT_wRwT - original windowed bivariate spectrum
+% W2DFT_mean - mutitaper concentrated bivariate spectrum mean
+% W2DFT_con - concentrated bivariate spectra
 
 if ~exist('avgtype',"var")
     avgtype = 'noncoherent';
