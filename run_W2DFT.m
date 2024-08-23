@@ -38,6 +38,7 @@ eta_bins = linspace(-0.5, 0.5, NFFT_eta);
 
 figure;
 imagesc(omega_bins,eta_bins,db(abs(W2DFT_distribution)))
+set(gca, 'YDir','normal')
 xlabel('Normalized freq. $\omega$')
 ylabel('Normalized freq. $\eta$')
 colormap("turbo")

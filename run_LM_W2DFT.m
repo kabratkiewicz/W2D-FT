@@ -36,6 +36,7 @@ for m = 1:numel(mu)
     [S_con] = W2DFT_LM(signal, NFFT_omega, NFFT_eta, mu(m));
     figure;
     imagesc(omega_bins, eta_bins, db(abs(S_con)))
+    set(gca, 'YDir','normal')
     xlabel('Normalized freq. $\omega$')
     ylabel('Normalized freq. $\eta$')
     colormap("turbo")
