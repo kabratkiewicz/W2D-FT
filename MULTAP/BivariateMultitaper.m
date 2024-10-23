@@ -23,11 +23,11 @@ if ~exist('avgtype',"var")
     avgtype = 'noncoherent';
 end
 
-Y = size(signal,1);
-X = size(signal,2);
+R = size(signal,1);
+T = size(signal,2);
 
-[hT, dhT ,~] = hermf(X, M, sigmaT);
-[hR, dhR, ~] = hermf(Y, M, sigmaR);
+[hT, dhT ,~] = hermf(T, M, sigmaT);
+[hR, dhR, ~] = hermf(R, M, sigmaR);
 
 W2DFT_wRwT  = zeros(NFFT_eta, NFFT_omega, M);
 W2DFT_dwRwT = zeros(NFFT_eta, NFFT_omega, M);
