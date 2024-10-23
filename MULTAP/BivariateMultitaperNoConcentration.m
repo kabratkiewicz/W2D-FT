@@ -17,11 +17,11 @@ function [F_wRwT, F_wRwT_mean] = BivariateMultitaperNoConcentration(signal, M, s
 % F_wRwT - original windowed bivariate spectrum
 % F_wRwT_mean - mutitaper bivariate spectrum mean
 
-Y = size(signal,1);
-X = size(signal,2);
+R = size(signal,1);
+T = size(signal,2);
 
-[hT, ~ ,~] = hermf(X, M, sigmaT);
-[hR, ~, ~] = hermf(Y, M, sigmaR);
+[hT, ~ ,~] = hermf(T, M, sigmaT);
+[hR, ~, ~] = hermf(R, M, sigmaR);
 
 F_wRwT  = zeros(NFFT_eta, NFFT_omega, M);
 
