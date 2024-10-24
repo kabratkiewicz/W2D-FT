@@ -25,7 +25,7 @@ load("data.mat");  % load example signal - 2D time domain signal
 
 signal = awgn(signal, 10); % add some noise
 
-estimator  = 3;     % estimator number from 1 to 3
+estimator  = 1;     % estimator number from 1 to 3
 NFFT_omega = 1024;  % FFT size in omega
 NFFT_eta   = 1024;  % FFT size in eta
 
@@ -39,8 +39,8 @@ eta_bins = linspace(-0.5, 0.5, NFFT_eta);
 figure;
 imagesc(omega_bins,eta_bins,db(abs(W2DFT_distribution)))
 set(gca, 'YDir','normal')
-xlabel('Normalized freq. $\omega$')
-ylabel('Normalized freq. $\eta$')
+xlabel('Normalized freq. $\eta$')
+ylabel('Normalized freq. $\omega$')
 colormap("turbo")
 c = colorbar;
 c.Label.String = 'Magnitude [dB]';
@@ -50,8 +50,8 @@ clim([max(max(db(abs(W2DFT_distribution)))) - threshold, max(max(db(abs(W2DFT_di
 
 figure;
 imagesc(omega_bins,eta_bins,db(abs(W2DFT_concentrated_distribution)))
-xlabel('Normalized freq. $\omega$')
-ylabel('Normalized freq. $\eta$')
+xlabel('Normalized freq. $\eta$')
+ylabel('Normalized freq. $\omega$')
 colormap("turbo")
 c = colorbar;
 c.Label.String = 'Magnitude [dB]';
