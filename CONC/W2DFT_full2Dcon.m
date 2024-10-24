@@ -1,3 +1,11 @@
+% Author: Karol Abratkiewicz
+% karol.abratkiewicz@pw.edu.pl  
+% Warsaw University of Technology
+% K. Abratkiewicz, "Windowed Two-Dimensional Fourier Transform 
+% Concentration and Its Application to ISAR Imaging," in IEEE Transactions 
+% on Image Processing, vol. 32, pp. 6260-6273, 2023, 
+% doi: 10.1109/TIP.2023.3330603. 
+
 function [W2DFT_original, W2DFT_con] = W2DFT_full2Dcon(signal, est, NFFT_omega, NFFT_eta)
 % inputs:
 % signal - two-dimensional time-domain signal
@@ -91,11 +99,9 @@ switch est
 
                 omega_est(:,:,tshift,rshift) = round(omega_bins.' + NFFT_omega * imag((W2DFT_wRdtwT .* W2DFT_wRdwT - W2DFT_wRd2wT .* W2DFT_wRtwT)./(W2DFT_wRdwT .* W2DFT_wRtwT - W2DFT_wRdtwT .* W2DFT_original(:,:,tshift,rshift))./2/pi));
                 eta_est(:,:,tshift,rshift)   = round(eta_bins + NFFT_eta   * imag((W2DFT_drwRwT .* W2DFT_dwRwT - W2DFT_d2wRwT .* W2DFT_rwRwT)./(W2DFT_dwRwT .* W2DFT_rwRwT - W2DFT_drwRwT .* W2DFT_original(:,:,tshift,rshift))./2/pi));
-
             end
         end
-        
-        
+             
     case 3
         wT   = blackman_harris_window( T, 0, 0).';
         dwT  = blackman_harris_window( T, 1, 0).';
@@ -138,12 +144,6 @@ switch est
             end
         end
 end
-
-
-
-%%%%%%%%%%%%%%
-
-
 %%
 for tshift = 1 : T
     for rshift = 1 : R
