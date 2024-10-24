@@ -1,6 +1,6 @@
 function [ W ] = blackman_harris_window( len, D, T) 
 % len - window length, 
-% N - derivative order
+% D - derivative order
 % T - time ramp order
 
     a_0 = 0.3232153788877343;

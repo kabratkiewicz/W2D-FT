@@ -1,11 +1,11 @@
 % Author: Karol Abratkiewicz
 % karol.abratkiewicz@pw.edu.pl  
-% Warsaw University of Technology
+% Warsaw University of technology
 % K. Abratkiewicz, "Multitaper ISAR Noise Suppression," in IEEE 
 % Transactions on Geoscience and Remote Sensing, vol. 62, pp. 1-13, 2024, 
 % Art no. 5217313, doi: 10.1109/TGRS.2024.3427397.
 
-function [W2DFT_wRwT, W2DFT_mean, W2DFT_con] = BivariateMultitaper(signal, M, sigmaT, sigmaR, NFFT_omega, NFFT_eta, avgtype)
+function [W2DFT_original, W2DFT_mean, W2DFT_con] = BivariateMultitaper(signal, M, sigmaT, sigmaR, NFFT_omega, NFFT_eta, avgtype)
 % inputs:
 % signal - two-dimensional time-domain signal
 % M - Hermite function order
@@ -15,7 +15,7 @@ function [W2DFT_wRwT, W2DFT_mean, W2DFT_con] = BivariateMultitaper(signal, M, si
 %   respectively
 % avgtype - averaging type: 'noncoherent' and 'coherent'
 % output:
-% W2DFT_wRwT - original windowed bivariate spectrum
+% W2DFT_hRhT - original windowed bivariate spectrum
 % W2DFT_mean - mutitaper concentrated bivariate spectrum mean
 % W2DFT_con - concentrated bivariate spectra
 
@@ -29,9 +29,9 @@ T = size(signal,1);
 [hT, dhT ,~] = hermf(T, M, sigmaT);
 [hR, dhR, ~] = hermf(R, M, sigmaR);
 
-W2DFT_wRwT  = zeros(NFFT_omega, NFFT_eta, M);
-W2DFT_dwRwT = zeros(NFFT_omega, NFFT_eta, M);
-W2DFT_wRdwT = zeros(NFFT_omega, NFFT_eta, M);
+W2DFT_hRhT  = zeros(NFFT_omega, NFFT_eta, M);
+W2DFT_dhRhT = zeros(NFFT_omega, NFFT_eta, M);
+W2DFT_hRdhT = zeros(NFFT_omega, NFFT_eta, M);
 
 omega_shift = zeros(NFFT_omega, NFFT_eta,M);
 eta_shift = zeros(NFFT_omega, NFFT_eta,M);
@@ -40,20 +40,20 @@ omega_bins = 1:NFFT_omega;
 eta_bins = 1:NFFT_eta;
 
 for i = 1:M
-    wRwT   = hT(i,:).'  .* hR(i,:);
-    W2DFT_wRwT(:,:,i) = fftshift(fftshift(fft2(signal .* wRwT ,   NFFT_omega, NFFT_eta),1),2);
+    hRhT   = hT(i,:).'  .* hR(i,:);
+    W2DFT_hRhT(:,:,i) = fftshift(fftshift(fft2(signal .* hRhT ,   NFFT_omega, NFFT_eta),1),2);
 
-    dwRwT   = dhT(i,:).'  .* hR(i,:);
-    W2DFT_dwRwT(:,:,i) = fftshift(fftshift(fft2(signal .* dwRwT ,   NFFT_omega, NFFT_eta),1),2);
+    dhRhT   = hT(i,:).'  .* dhR(i,:);
+    W2DFT_dhRhT(:,:,i) = fftshift(fftshift(fft2(signal .* dhRhT ,   NFFT_omega, NFFT_eta),1),2);
 
-    wRdwT   = hT(i,:).'  .* dhR(i,:);
-    W2DFT_wRdwT(:,:,i) = fftshift(fftshift(fft2(signal .* wRdwT ,   NFFT_omega, NFFT_eta),1),2);
+    hRdhT   = dhT(i,:).'  .* hR(i,:);
+    W2DFT_hRdhT(:,:,i) = fftshift(fftshift(fft2(signal .* hRdhT ,   NFFT_omega, NFFT_eta),1),2);
 
-    omega_shift(:,:,i) = omega_bins   - round(imag(NFFT_omega .* W2DFT_wRdwT(:,:,i)./W2DFT_wRwT(:,:,i)./2/pi));
-    eta_shift(:,:,i) = eta_bins.' - round(imag(NFFT_eta .* W2DFT_dwRwT(:,:,i)./W2DFT_wRwT(:,:,i)./2/pi));
+    omega_shift(:,:,i) = omega_bins.'   - round(imag(NFFT_omega .* W2DFT_hRdhT(:,:,i)./W2DFT_hRhT(:,:,i)./2/pi));
+    eta_shift(:,:,i) = eta_bins - round(imag(NFFT_eta .* W2DFT_dhRhT(:,:,i)./W2DFT_hRhT(:,:,i)./2/pi));
 end
 
-W2DFT_con = zeros(size(W2DFT_wRwT));
+W2DFT_con = zeros(size(W2DFT_hRhT));
 for k = 1 : M
     for i = 1 : NFFT_omega
         for j = 1 : NFFT_eta
@@ -66,9 +66,9 @@ for k = 1 : M
                 continue;
             end
             if strcmp(avgtype,'coherent')
-                W2DFT_con(omega_idx, eta_idx, k) = W2DFT_con(omega_idx, eta_idx, k) + W2DFT_wRwT(i, j, k);
+                W2DFT_con(omega_idx, eta_idx, k) = W2DFT_con(omega_idx, eta_idx, k) + W2DFT_hRhT(i, j, k);
             elseif strcmp(avgtype,'noncoherent')
-                W2DFT_con(omega_idx, eta_idx, k) = W2DFT_con(omega_idx, eta_idx, k) + abs(W2DFT_wRwT(i, j, k)).^2;
+                W2DFT_con(omega_idx, eta_idx, k) = W2DFT_con(omega_idx, eta_idx, k) + abs(W2DFT_hRhT(i, j, k)).^2;
             end
 
         end
@@ -79,5 +79,7 @@ if strcmp(avgtype,'coherent')
 elseif strcmp(avgtype,'noncoherent')
     W2DFT_mean =  mean(W2DFT_con, 3);
 end
+
+W2DFT_original = W2DFT_hRhT;
 
 end

@@ -47,7 +47,7 @@ omega_bins = (1 : NFFT_omega);
 eta_bins   = (1 : NFFT_eta);
 
 W2DFT_con      = zeros(NFFT_omega, NFFT_eta, T, R);
-W2DFT_original = zeros(NFFT_omega, NFFT_eta, T, R);
+W2DFT_hRhT = zeros(NFFT_omega, NFFT_eta, T, R);
 omega_est      = zeros(NFFT_omega, NFFT_eta, T, R);
 eta_est        = zeros(NFFT_omega, NFFT_eta, T, R);
 t_est          = zeros(NFFT_omega, NFFT_eta, T, R);
@@ -56,16 +56,16 @@ r_est          = zeros(NFFT_omega, NFFT_eta, T, R);
 for rshift = 1 : R
     for tshift = 1 : T
         x_tmp = x( tshift:tshift + T - 1, rshift:rshift + R - 1);
-        W2DFT_original(:,:,tshift,rshift)  = fftshift(fftshift(fft2(x_tmp .* hRhT,  NFFT_omega, NFFT_eta),1),2);
-        W2DFT_wRdwT = fftshift(fftshift(fft2(x_tmp .* hRdhT, NFFT_omega, NFFT_eta),1),2);
-        W2DFT_dwRwT = fftshift(fftshift(fft2(x_tmp .* dhRhT, NFFT_omega, NFFT_eta),1),2);
-        W2DFT_wRtwT = fftshift(fftshift(fft2(x_tmp .* hRthT, NFFT_omega, NFFT_eta),1),2);
-        W2DFT_twRwT = fftshift(fftshift(fft2(x_tmp .* thRhT, NFFT_omega, NFFT_eta),1),2);
+        W2DFT_hRhT(:,:,tshift,rshift)  = fftshift(fftshift(fft2(x_tmp .* hRhT,  NFFT_omega, NFFT_eta),1),2);
+        W2DFT_hRdhT = fftshift(fftshift(fft2(x_tmp .* hRdhT, NFFT_omega, NFFT_eta),1),2);
+        W2DFT_dhRhT = fftshift(fftshift(fft2(x_tmp .* dhRhT, NFFT_omega, NFFT_eta),1),2);
+        W2DFT_hRthT = fftshift(fftshift(fft2(x_tmp .* hRthT, NFFT_omega, NFFT_eta),1),2);
+        W2DFT_thRhT = fftshift(fftshift(fft2(x_tmp .* thRhT, NFFT_omega, NFFT_eta),1),2);
 
-        omega_est(:,:,tshift,rshift) = round(omega_bins.' - NFFT_omega*imag(W2DFT_wRdwT ./ W2DFT_original(:,:,tshift,rshift))/2/pi );
-        eta_est(:,:,tshift,rshift)   = round(eta_bins - NFFT_eta*imag(W2DFT_dwRwT ./ W2DFT_original(:,:,tshift,rshift))/2/pi );
-        t_est(:,:,tshift,rshift)     = round(tshift   +  real(W2DFT_wRtwT ./ W2DFT_original(:,:,tshift,rshift)) );
-        r_est(:,:,tshift,rshift)     = round(rshift   +  real(W2DFT_twRwT ./ W2DFT_original(:,:,tshift,rshift)) );
+        omega_est(:,:,tshift,rshift) = round(omega_bins.' - NFFT_omega*imag(W2DFT_hRdhT ./ W2DFT_hRhT(:,:,tshift,rshift))/2/pi );
+        eta_est(:,:,tshift,rshift)   = round(eta_bins - NFFT_eta*imag(W2DFT_dhRhT ./ W2DFT_hRhT(:,:,tshift,rshift))/2/pi );
+        t_est(:,:,tshift,rshift)     = round(tshift   +  real(W2DFT_hRthT ./ W2DFT_hRhT(:,:,tshift,rshift)) );
+        r_est(:,:,tshift,rshift)     = round(rshift   +  real(W2DFT_thRhT ./ W2DFT_hRhT(:,:,tshift,rshift)) );
     end
 end
 %%
@@ -90,9 +90,10 @@ for tshift = 1 : T
                     continue;
                 end
 
-                W2DFT_con(omega_idx, eta_idx,t_idx, r_idx) = W2DFT_con(omega_idx, eta_idx,t_idx, r_idx) + abs(W2DFT_original(i,j,tshift,rshift)^2);
+                W2DFT_con(omega_idx, eta_idx,t_idx, r_idx) = W2DFT_con(omega_idx, eta_idx,t_idx, r_idx) + abs(W2DFT_hRhT(i,j,tshift,rshift)^2);
             end
         end
     end
 end
+W2DFT_original = W2DFT_hRhT;
 end

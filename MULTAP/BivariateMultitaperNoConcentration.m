@@ -5,7 +5,7 @@
 % Transactions on Geoscience and Remote Sensing, vol. 62, pp. 1-13, 2024, 
 % Art no. 5217313, doi: 10.1109/TGRS.2024.3427397.
 
-function [F_wRwT, F_wRwT_mean] = BivariateMultitaperNoConcentration(signal, M, sigmaT, sigmaR, NFFT_omega, NFFT_eta)
+function [W2DFT_original, W2DFT_original_mean] = BivariateMultitaperNoConcentration(signal, M, sigmaT, sigmaR, NFFT_omega, NFFT_eta)
 % inputs:
 % signal - two-dimensional time-domain signal
 % M - Hermite function order
@@ -14,22 +14,23 @@ function [F_wRwT, F_wRwT_mean] = BivariateMultitaperNoConcentration(signal, M, s
 % NFFT_omega, NFFT_eta - FFT size in the omega and eta frequency domain,
 %   respectively
 % output:
-% F_wRwT - original windowed bivariate spectrum
-% F_wRwT_mean - mutitaper bivariate spectrum mean
+% F_hRhT - original windowed bivariate spectrum
+% F_hRhT_mean - mutitaper bivariate spectrum mean
 
-R = size(signal,1);
-T = size(signal,2);
+R = size(signal,2);
+T = size(signal,1);
 
 [hT, ~ ,~] = hermf(T, M, sigmaT);
 [hR, ~, ~] = hermf(R, M, sigmaR);
 
-F_wRwT  = zeros(NFFT_eta, NFFT_omega, M);
+W2DFT_hRhT  = zeros(NFFT_omega, NFFT_eta, M);
 
 for i = 1:M
-    wRwT = hT(i,:) .* hR(i,:).';
-    F_wRwT(:,:,i) = abs(fftshift(fftshift(fft2(signal .* wRwT ,    NFFT_eta, NFFT_omega),1),2)).^2;
+    hRhT = hT(i,:).' .* hR(i,:);
+    W2DFT_hRhT(:,:,i) = abs(fftshift(fftshift(fft2(signal .* hRhT ,    NFFT_omega, NFFT_eta),1),2)).^2;
 end
 
-F_wRwT_mean =  mean(F_wRwT, 3);
+W2DFT_original_mean =  mean(W2DFT_hRhT, 3);
+W2DFT_original = W2DFT_hRhT;
 
 end

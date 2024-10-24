@@ -1,8 +1,8 @@
 % Author: Karol Abratkiewicz
 % karol.abratkiewicz@pw.edu.pl  
-% Warsaw University of technology
+% Warsaw University of Technology
 % K.Abratkiewicz, M. K. Baczyk, P. Samczynski "Software-Oriented Adjustable
-% Concentration of ISAR Images -- Towards Super-Resolution", IEEE Sensors Journal 2025
+% Concentration of ISAR Images -- Towards Super-Resolution", RadarConf 2025
 % 
 % This script runs the Lavenberg-Marquad 2D spectrum concentration. The
 % input signal is transformed into the bivariate spectrum. Next, the
@@ -34,9 +34,9 @@ omega_bins = linspace(-0.5, 0.5, NFFT_omega);
 eta_bins = linspace(-0.5, 0.5, NFFT_eta);
 
 for m = 1:numel(mu)
-    [S_con] = W2DFT_LM(signal, NFFT_omega, NFFT_eta, mu(m));
+    [~, W2DFT_con] = W2DFT_LM(signal, NFFT_omega, NFFT_eta, mu(m));
     figure;
-    imagesc(omega_bins, eta_bins, db(abs(S_con)))
+    imagesc(omega_bins, eta_bins, db(abs(W2DFT_con)))
     set(gca, 'YDir','normal')
     xlabel('Normalized freq. $\eta$')
     ylabel('Normalized freq. $\omega$')
@@ -45,5 +45,5 @@ for m = 1:numel(mu)
     c.Label.String = 'Magnitude [dB]';
     c.Label.Interpreter = 'latex';
     c.TickLabelInterpreter = 'latex';
-    clim([max(max(db(abs(S_con)))) - threshold, max(max(db(abs(S_con))))])
+    clim([max(max(db(abs(W2DFT_con)))) - threshold, max(max(db(abs(W2DFT_con))))])
 end
