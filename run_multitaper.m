@@ -23,7 +23,7 @@ Init_Env(fontsize,img_max_size);
 
 load("data.mat");  % load example signal - 2D time domain signal
 
-signal = awgn(signal, 5); % add some noise
+signal = awgn(signal, 10); % add some noise
 
 NFFT_omega = 1024;  % FFT size in omega
 NFFT_eta   = 1024;  % FFT size in eta
@@ -45,8 +45,8 @@ eta_bins = linspace(-0.5, 0.5, NFFT_eta);
 figure;
 imagesc(omega_bins,eta_bins,db(abs(W2DFT_distributions(:,:,1))))
 set(gca, 'YDir','normal')
-xlabel('Normalized freq. $\omega$')
-ylabel('Normalized freq. $\eta$')
+xlabel('Normalized freq. $\eta$')
+ylabel('Normalized freq. $\omega$')
 colormap("turbo")
 c = colorbar;
 c.Label.String = 'Magnitude [dB]';
@@ -58,8 +58,8 @@ clim([max(max(db(abs(W2DFT_distributions(:,:,1))))) - threshold, max(max(db(abs(
 figure;
 imagesc(omega_bins,eta_bins,db(abs(W2DFT_hermite_mean)))
 set(gca, 'YDir','normal')
-xlabel('Normalized freq. $\omega$')
-ylabel('Normalized freq. $\eta$')
+xlabel('Normalized freq. $\eta$')
+ylabel('Normalized freq. $\omega$')
 colormap("turbo")
 c = colorbar;
 c.Label.String = 'Magnitude [dB]';
@@ -74,8 +74,8 @@ clim([max(max(db(abs(W2DFT_hermite_mean)))) - threshold, max(max(db(abs(W2DFT_he
 figure;
 imagesc(omega_bins,eta_bins,db(abs(wRwT_mean)))
 set(gca, 'YDir','normal')
-xlabel('Normalized freq. $\omega$')
-ylabel('Normalized freq. $\eta$')
+xlabel('Normalized freq. $\eta$')
+ylabel('Normalized freq. $\omega$')
 colormap("turbo")
 c = colorbar;
 c.Label.String = 'Magnitude [dB]';
