@@ -41,7 +41,7 @@ sigmaR = 5; % window time spread parameter for r
 omega_bins = linspace(-0.5, 0.5, NFFT_omega);
 eta_bins = linspace(-0.5, 0.5, NFFT_eta);
 
-% inital image (without concentration)
+% initial image (without concentration)
 figure;
 imagesc(omega_bins,eta_bins,db(abs(W2DFT_distributions(:,:,1))))
 set(gca, 'YDir','normal')
@@ -54,7 +54,7 @@ c.Label.Interpreter = 'latex';
 c.TickLabelInterpreter = 'latex';
 clim([max(max(db(abs(W2DFT_distributions(:,:,1))))) - threshold, max(max(db(abs(W2DFT_distributions(:,:,1)))))])
 
-% multitaper concetrated image
+% multitaper concentrated image
 figure;
 imagesc(omega_bins,eta_bins,db(abs(W2DFT_hermite_mean)))
 set(gca, 'YDir','normal')
