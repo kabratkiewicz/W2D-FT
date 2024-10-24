@@ -1,6 +1,6 @@
 % Author: Karol Abratkiewicz
 % karol.abratkiewicz@pw.edu.pl  
-% Warsaw University of technology
+% Warsaw University of Technology
 % K. Abratkiewicz, "Four-Dimensional Reassignment," in IEEE Signal Processing Letters, 2024 
 % 
 % This script transforms the bivariate time-domain signal to the four-dimensional
@@ -20,11 +20,6 @@ Init_Env(fontsize,img_max_size);
 
 load("data.mat");  % load example signal - 2D time domain signal
 signal = awgn(signal, 50,"measured"); % add some noise
-
-% load("chirp_2D_v2.mat");  % load example signal - 2D time domain signal
-% signal = awgn(signal, 50,"measured"); % add some noise
-% signal = signal(25:75,25:75);
-
 
 NFFT_omega = 256;  % FFT size in omega
 NFFT_eta   = 256;  % FFT size in eta
@@ -64,7 +59,7 @@ c.Label.String = 'Magnitude [dB]';
 c.Label.Interpreter = 'latex';
 c.TickLabelInterpreter = 'latex';
 clim([max(max(db(abs(W2DFT_con(:,:,cut_t,cut_r))))) - threshold, max(max(db(abs(W2DFT_con(:,:,cut_t,cut_r)))))])
-%% concenration only in the frequency domains
+%% concentration only in the frequency domains
 [~, W2DFT_concentrated_distribution] = W2DFT(signal, 1, NFFT_omega, NFFT_eta); 
 figure;
 imagesc(omega_bins,eta_bins,db(abs(W2DFT_concentrated_distribution)))
