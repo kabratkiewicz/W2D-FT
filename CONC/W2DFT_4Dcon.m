@@ -1,3 +1,11 @@
+% Author: Karol Abratkiewicz
+% karol.abratkiewicz@pw.edu.pl  
+% Warsaw University of Technology
+% K. Abratkiewicz, "Four-Dimensional Reassignment," in IEEE Signal Processing Letters, 2024 
+% 
+% This function transforms the bivariate time-domain signal to the four-dimensional
+% spatial time and spatial frequency distribution
+
 function [W2DFT_original, W2DFT_con] = W2DFT_4Dcon(signal, NFFT_omega, NFFT_eta)
 % inputs:
 % signal - two-dimensional time-domain signal
