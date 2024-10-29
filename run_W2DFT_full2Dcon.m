@@ -10,7 +10,7 @@ close all
 clear
 clc
 
-fontsize = 40;
+fontsize = 20;
 img_max_size = 1;
 threshold = 100;
 
