@@ -4,7 +4,7 @@
 % K. Abratkiewicz, "Four-Dimensional Reassignment," in IEEE Signal Processing Letters, 2024 
 % 
 % This script transforms the bivariate time-domain signal to the four-dimensional
-% spatial time and spatial frequency distribution
+% spatial time-space-frequency-wavenumber distribution
 
 close all
 clear
