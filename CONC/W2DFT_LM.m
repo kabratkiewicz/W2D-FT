@@ -14,8 +14,8 @@ function [W2DFT_original, W2DFT_con] = W2DFT_LM(signal, NFFT_omega, NFFT_eta, mu
 % output:
 % S_con - concentrated bivariate spectrum
 
-R = size(signal,1);
-T = size(signal,2);
+R = size(signal,2);
+T = size(signal,1);
 
 hT             = blackman_harris_window( T, 0, 0).';
 dhT            = blackman_harris_window( T, 1, 0).';
