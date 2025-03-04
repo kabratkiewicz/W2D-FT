@@ -16,10 +16,10 @@ function [W2DFT_original, W2DFT_con] = W2DFT_full2Dcon(signal, est, NFFT_omega, 
 % W2DFT_con - concentrated 4D distribution
 
 r = 1 : size(signal,2); 
-r = r - mean(r)/2; 
+r = r - mean(r); 
 Lr = length(r);
 t = 1 : size(signal,1); 
-t = t - mean(t)/2; 
+t = t - mean(t); 
 Lt = length(t);
 T = size(signal, 1); 
 R = size(signal, 2);
