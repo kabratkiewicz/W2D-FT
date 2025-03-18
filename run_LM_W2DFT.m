@@ -2,7 +2,7 @@
 % karol.abratkiewicz@pw.edu.pl  
 % Warsaw University of Technology
 % K.Abratkiewicz, M. K. Baczyk, P. Samczynski "Software-Oriented Adjustable
-% Concentration of ISAR Images -- Towards Super-Resolution", RadarConf 2025
+% Concentration of ISAR Images -- Towards Super-Resolution", IEEE Sensors Journal 2025
 % 
 % This script runs the Lavenberg-Marquad 2D spectrum concentration. The
 % input signal is transformed into the bivariate spectrum. Next, the
