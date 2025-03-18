@@ -64,7 +64,7 @@ clim([max(max(db(abs(W2DFT_original(cut_omega,cut_eta,:,:))))) - threshold, max(
 
 %% plotting the results
 figure;
-imagesc(omega_bins, eta_bins, db(abs(W2DFT_con(:,:,cut_t,cut_r))));
+imagesc(omega_bins, eta_bins, db(abs(W2DFT_con(:,:,cut_t,cut_r)),"power"));
 set(gca,'ydir','normal');
 ylabel('Normalized frequency $\eta$')
 xlabel('Normalized frequency $\omega$')
@@ -73,10 +73,10 @@ c = colorbar;
 c.Label.String = 'Magnitude [dB]';
 c.Label.Interpreter = 'latex';
 c.TickLabelInterpreter = 'latex';
-clim([max(max(db(abs(W2DFT_con(:,:,cut_t,cut_r))))) - threshold, max(max(db(abs(W2DFT_con(:,:,cut_t,cut_r)))))])
+clim([max(max(db(abs(W2DFT_con(:,:,cut_t,cut_r)),"power"))) - threshold, max(max(db(abs(W2DFT_con(:,:,cut_t,cut_r)),"power")))])
 
 figure;
-imagesc(t, r, db(abs(squeeze(W2DFT_con(cut_omega,cut_eta,:,:)))));
+imagesc(t, r, db(abs(squeeze(W2DFT_con(cut_omega,cut_eta,:,:))),"power"));
 set(gca,'ydir','normal');
 ylabel('Space $r$ samples')
 xlabel('Time $t$ samples')
@@ -85,12 +85,12 @@ c = colorbar;
 c.Label.String = 'Magnitude [dB]';
 c.Label.Interpreter = 'latex';
 c.TickLabelInterpreter = 'latex';
-clim([max(max(db(abs(W2DFT_con(cut_omega,cut_eta,:,:))))) - threshold, max(max(db(abs(W2DFT_con(cut_omega,cut_eta,:,:)))))])
+clim([max(max(db(abs(W2DFT_con(cut_omega,cut_eta,:,:)),"power"))) - threshold, max(max(db(abs(W2DFT_con(cut_omega,cut_eta,:,:)),"power")))])
 
 %% concenration only in the frequency domains
 [~, W2DFT_concentrated_distribution] = W2DFT_full2Dcon(signal, 1, NFFT_omega, NFFT_eta); 
 figure;
-imagesc(omega_bins,eta_bins,db(abs(W2DFT_concentrated_distribution(:,:,cut_t,cut_r))))
+imagesc(omega_bins,eta_bins,db(abs(W2DFT_concentrated_distribution(:,:,cut_t,cut_r)),"power"))
 set(gca,'ydir','normal');
 ylabel('Normalized frequency $\eta$')
 xlabel('Normalized frequency $\omega$')
@@ -99,10 +99,10 @@ c = colorbar;
 c.Label.String = 'Magnitude [dB]';
 c.Label.Interpreter = 'latex';
 c.TickLabelInterpreter = 'latex';
-clim([max(max(db(abs(W2DFT_concentrated_distribution(:,:,cut_t,cut_r))))) - threshold, max(max(db(abs(W2DFT_concentrated_distribution(:,:,cut_t,cut_r)))))])
+clim([max(max(db(abs(W2DFT_concentrated_distribution(:,:,cut_t,cut_r)),"power"))) - threshold, max(max(db(abs(W2DFT_concentrated_distribution(:,:,cut_t,cut_r)),"power")))])
 
 figure;
-imagesc(t, r, db(abs(squeeze(W2DFT_concentrated_distribution(cut_omega,cut_eta,:,:)))));
+imagesc(t, r, db(abs(squeeze(W2DFT_concentrated_distribution(cut_omega,cut_eta,:,:))),"power"));
 set(gca,'ydir','normal');
 ylabel('Space $r$ samples')
 xlabel('Time $t$ samples')
@@ -111,4 +111,4 @@ c = colorbar;
 c.Label.String = 'Magnitude [dB]';
 c.Label.Interpreter = 'latex';
 c.TickLabelInterpreter = 'latex';
-clim([max(max(db(abs(W2DFT_concentrated_distribution(cut_omega,cut_eta,:,:))))) - threshold, max(max(db(abs(W2DFT_concentrated_distribution(cut_omega,cut_eta,:,:)))))])
+clim([max(max(db(abs(W2DFT_concentrated_distribution(cut_omega,cut_eta,:,:)),"power"))) - threshold, max(max(db(abs(W2DFT_concentrated_distribution(cut_omega,cut_eta,:,:)),"power")))])
