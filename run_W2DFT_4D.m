@@ -112,20 +112,3 @@ c.Label.String = 'Magnitude [dB]';
 c.Label.Interpreter = 'latex';
 c.TickLabelInterpreter = 'latex';
 clim([max(max(db(abs(W2DFT_concentrated_distribution(cut_omega,cut_eta,:,:))))) - threshold, max(max(db(abs(W2DFT_concentrated_distribution(cut_omega,cut_eta,:,:)))))])
-
-
-
-
-% [W2DFT_distribution, W2DFT_concentrated_distribution] = W2DFT(signal, 2, NFFT_omega, NFFT_eta); 
-% figure;
-% imagesc(omega_bins,eta_bins,db(abs(W2DFT_concentrated_distribution)))
-% set(gca,'ydir','normal');
-% xlabel('Normalized freq. $\eta$')
-% ylabel('Normalized freq. $\omega$')
-% colormap("turbo")
-% c = colorbar;
-% c.Label.String = 'Magnitude [dB]';
-% c.Label.Interpreter = 'latex';
-% c.TickLabelInterpreter = 'latex';
-% clim([max(max(db(abs(W2DFT_concentrated_distribution)))) - threshold, max(max(db(abs(W2DFT_concentrated_distribution))))])
-% 
