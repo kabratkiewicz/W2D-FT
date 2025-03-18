@@ -39,8 +39,8 @@ eta_bins = linspace(-0.5, 0.5, NFFT_eta);
 figure;
 imagesc(omega_bins, eta_bins, db(abs(W2DFT_original(:,:,cut_t,cut_r))));
 set(gca,'ydir','normal');
-xlabel('Normalized freq. $\eta$')
-ylabel('Normalized freq. $\omega$')
+xlabel('Normalized freq. $\omega$')
+ylabel('Normalized freq. $\eta$')
 colormap("turbo")
 c = colorbar;
 c.Label.String = 'Magnitude [dB]';
@@ -51,8 +51,8 @@ clim([max(max(db(abs(W2DFT_original(:,:,cut_t,cut_r))))) - threshold, max(max(db
 figure;
 imagesc(omega_bins, eta_bins, db(abs(W2DFT_con(:,:,cut_t,cut_r))));
 set(gca,'ydir','normal');
-xlabel('Normalized freq. $\eta$')
-ylabel('Normalized freq. $\omega$')
+xlabel('Normalized freq. $\omega$')
+ylabel('Normalized freq. $\eta$')
 colormap("turbo")
 c = colorbar;
 c.Label.String = 'Magnitude [dB]';
@@ -65,8 +65,8 @@ clim([max(max(db(abs(W2DFT_con(:,:,cut_t,cut_r))))) - threshold, max(max(db(abs(
 figure;
 imagesc(omega_bins,eta_bins,db(abs(W2DFT_concentrated_distribution)))
 set(gca,'ydir','normal');
-xlabel('Normalized freq. $\eta$')
-ylabel('Normalized freq. $\omega$')
+xlabel('Normalized freq. $\omega$')
+ylabel('Normalized freq. $\eta$')
 colormap("turbo")
 c = colorbar;
 c.Label.String = 'Magnitude [dB]';
