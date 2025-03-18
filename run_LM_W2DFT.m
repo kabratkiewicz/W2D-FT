@@ -36,7 +36,7 @@ eta_bins = linspace(-0.5, 0.5, NFFT_eta);
 for m = 1:numel(mu)
     [~, W2DFT_con] = W2DFT_LM(signal, NFFT_omega, NFFT_eta, mu(m));
     figure;
-    imagesc(omega_bins, eta_bins, db(abs(W2DFT_con)))
+    imagesc(omega_bins, eta_bins, db(abs(W2DFT_con),"power"))
     set(gca, 'YDir','normal')
     xlabel('Normalized freq. $\omega$')
     ylabel('Normalized freq. $\eta$')
@@ -45,5 +45,5 @@ for m = 1:numel(mu)
     c.Label.String = 'Magnitude [dB]';
     c.Label.Interpreter = 'latex';
     c.TickLabelInterpreter = 'latex';
-    clim([max(max(db(abs(W2DFT_con)))) - threshold, max(max(db(abs(W2DFT_con))))])
+    clim([max(max(db(abs(W2DFT_con),"power"))) - threshold, max(max(db(abs(W2DFT_con),"power")))])
 end
