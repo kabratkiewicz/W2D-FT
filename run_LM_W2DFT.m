@@ -38,8 +38,8 @@ for m = 1:numel(mu)
     figure;
     imagesc(omega_bins, eta_bins, db(abs(W2DFT_con)))
     set(gca, 'YDir','normal')
-    xlabel('Normalized freq. $\eta$')
-    ylabel('Normalized freq. $\omega$')
+    xlabel('Normalized freq. $\omega$')
+    ylabel('Normalized freq. $\eta$')
     colormap("turbo")
     c = colorbar;
     c.Label.String = 'Magnitude [dB]';
