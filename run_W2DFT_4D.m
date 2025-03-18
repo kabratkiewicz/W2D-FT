@@ -18,8 +18,8 @@ addpath("UTILS/")
 addpath("CONC/")
 Init_Env(fontsize,img_max_size);
 
-% load("data.mat");  % load example signal - 2D time domain signal
-% signal = awgn(signal, 50,"measured"); % add some noise
+load("data.mat");  % load example signal - 2D time domain signal
+signal = awgn(signal, 50,"measured"); % add some noise
 
 NFFT_omega = 256;  % FFT size in omega
 NFFT_eta   = 256;  % FFT size in eta
