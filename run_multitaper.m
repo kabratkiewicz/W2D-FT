@@ -56,7 +56,7 @@ clim([max(max(db(abs(W2DFT_distributions(:,:,1))))) - threshold, max(max(db(abs(
 
 % multitaper concentrated image
 figure;
-imagesc(omega_bins,eta_bins,db(abs(W2DFT_hermite_mean)))
+imagesc(omega_bins,eta_bins,db(abs(W2DFT_hermite_mean),"power"))
 set(gca, 'YDir','normal')
 xlabel('Normalized freq. $\omega$')
 ylabel('Normalized freq. $\eta$')
@@ -65,7 +65,7 @@ c = colorbar;
 c.Label.String = 'Magnitude [dB]';
 c.Label.Interpreter = 'latex';
 c.TickLabelInterpreter = 'latex';
-clim([max(max(db(abs(W2DFT_hermite_mean)))) - threshold, max(max(db(abs(W2DFT_hermite_mean))))])
+clim([max(max(db(abs(W2DFT_hermite_mean),"power"))) - threshold, max(max(db(abs(W2DFT_hermite_mean),"power")))])
 
 
 %% processing - multitaper without concentration
