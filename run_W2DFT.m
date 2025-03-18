@@ -50,6 +50,7 @@ clim([max(max(db(abs(W2DFT_distribution)))) - threshold, max(max(db(abs(W2DFT_di
 
 figure;
 imagesc(omega_bins,eta_bins,db(abs(W2DFT_concentrated_distribution)))
+set(gca, 'YDir','normal')
 xlabel('Normalized freq. $\omega$')
 ylabel('Normalized freq. $\eta$')
 colormap("turbo")
