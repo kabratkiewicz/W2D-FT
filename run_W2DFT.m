@@ -49,7 +49,7 @@ c.TickLabelInterpreter = 'latex';
 clim([max(max(db(abs(W2DFT_distribution)))) - threshold, max(max(db(abs(W2DFT_distribution))))])
 
 figure;
-imagesc(omega_bins,eta_bins,db(abs(W2DFT_concentrated_distribution)))
+imagesc(omega_bins,eta_bins,db(abs(W2DFT_concentrated_distribution),"power"))
 set(gca, 'YDir','normal')
 xlabel('Normalized freq. $\omega$')
 ylabel('Normalized freq. $\eta$')
@@ -58,4 +58,4 @@ c = colorbar;
 c.Label.String = 'Magnitude [dB]';
 c.Label.Interpreter = 'latex';
 c.TickLabelInterpreter = 'latex';
-clim([max(max(db(abs(W2DFT_concentrated_distribution)))) - threshold, max(max(db(abs(W2DFT_concentrated_distribution))))])
+clim([max(max(db(abs(W2DFT_concentrated_distribution),"power"))) - threshold, max(max(db(abs(W2DFT_concentrated_distribution),"power")))])
