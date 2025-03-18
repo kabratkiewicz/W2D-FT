@@ -46,10 +46,10 @@ c = colorbar;
 c.Label.String = 'Magnitude [dB]';
 c.Label.Interpreter = 'latex';
 c.TickLabelInterpreter = 'latex';
-clim([max(max(db(abs(W2DFT_original(:,:,cut_t,cut_r))))) - threshold, max(max(db(abs(W2DFT_original(:,:,cut_t,cut_r)))))])
+clim([max(max(db(abs(W2DFT_original(:,:,cut_t,cut_r)),"power"))) - threshold, max(max(db(abs(W2DFT_original(:,:,cut_t,cut_r)),"power")))])
 
 figure;
-imagesc(omega_bins, eta_bins, db(abs(W2DFT_con(:,:,cut_t,cut_r))));
+imagesc(omega_bins, eta_bins, db(abs(W2DFT_con(:,:,cut_t,cut_r)),"power"));
 set(gca,'ydir','normal');
 xlabel('Normalized freq. $\omega$')
 ylabel('Normalized freq. $\eta$')
@@ -58,12 +58,12 @@ c = colorbar;
 c.Label.String = 'Magnitude [dB]';
 c.Label.Interpreter = 'latex';
 c.TickLabelInterpreter = 'latex';
-clim([max(max(db(abs(W2DFT_con(:,:,cut_t,cut_r))))) - threshold, max(max(db(abs(W2DFT_con(:,:,cut_t,cut_r)))))])
+clim([max(max(db(abs(W2DFT_con(:,:,cut_t,cut_r)),"power"))) - threshold, max(max(db(abs(W2DFT_con(:,:,cut_t,cut_r)),"power")))])
 %%
 
 [~, W2DFT_concentrated_distribution] = W2DFT(signal, est, NFFT_omega, NFFT_eta); 
 figure;
-imagesc(omega_bins,eta_bins,db(abs(W2DFT_concentrated_distribution)))
+imagesc(omega_bins,eta_bins,db(abs(W2DFT_concentrated_distribution),"power"))
 set(gca,'ydir','normal');
 xlabel('Normalized freq. $\omega$')
 ylabel('Normalized freq. $\eta$')
@@ -72,4 +72,4 @@ c = colorbar;
 c.Label.String = 'Magnitude [dB]';
 c.Label.Interpreter = 'latex';
 c.TickLabelInterpreter = 'latex';
-clim([max(max(db(abs(W2DFT_concentrated_distribution)))) - threshold, max(max(db(abs(W2DFT_concentrated_distribution))))])
+clim([max(max(db(abs(W2DFT_concentrated_distribution),"power"))) - threshold, max(max(db(abs(W2DFT_concentrated_distribution),"power")))])
