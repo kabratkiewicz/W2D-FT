@@ -26,6 +26,7 @@ NFFT_eta   = 256;  % FFT size in eta
 
 %% processing
 [W2DFT_original, W2DFT_con] = W2DFT_4Dcon(signal, NFFT_omega, NFFT_eta); 
+
 %% plotting the results
 T    = size(signal,2);
 R    = size(signal,1);
@@ -37,6 +38,10 @@ cut_omega = NFFT_omega/2;
 cut_eta = NFFT_eta/2;
 omega_bins = linspace(-0.5, 0.5, NFFT_omega);
 eta_bins = linspace(-0.5, 0.5, NFFT_eta);
+ren_order = 3;
+
+ren_original = Renyi_Entropy_4D(abs(W2DFT_original).^2, t, r, 1:NFFT_omega, 1:NFFT_eta, ren_order);
+ren_con = Renyi_Entropy_4D(abs(W2DFT_con).^2, t, r, 1:NFFT_omega, 1:NFFT_eta, ren_order);
 
 figure;
 imagesc(omega_bins, eta_bins, db(abs(W2DFT_original(:,:,cut_t,cut_r))));
