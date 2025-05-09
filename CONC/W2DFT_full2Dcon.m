@@ -165,7 +165,7 @@ for tshift = 1 : T
                 if omega_idx < 1 || omega_idx > NFFT_omega
                     continue;
                 end
-                W2DFT_con(omega_idx, eta_idx,tshift, rshift) = W2DFT_con(omega_idx, eta_idx, tshift, rshift) + abs(W2DFT_hRhT(i,j,tshift,rshift)^2);
+                W2DFT_con(omega_idx, eta_idx,tshift, rshift) = W2DFT_con(omega_idx, eta_idx, tshift, rshift) + abs(W2DFT_hRhT(i,j,tshift,rshift))^2;
             end
         end
     end
