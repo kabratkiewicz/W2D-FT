@@ -90,7 +90,7 @@ for tshift = 1 : T
                     continue;
                 end
 
-                W2DFT_con(omega_idx, eta_idx,t_idx, r_idx) = W2DFT_con(omega_idx, eta_idx,t_idx, r_idx) + abs(W2DFT_hRhT(i,j,tshift,rshift)^2);
+                W2DFT_con(omega_idx, eta_idx,t_idx, r_idx) = W2DFT_con(omega_idx, eta_idx,t_idx, r_idx) + abs(W2DFT_hRhT(i,j,tshift,rshift))^2;
             end
         end
     end
