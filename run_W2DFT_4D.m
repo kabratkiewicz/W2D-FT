@@ -28,12 +28,12 @@ NFFT_eta   = 256;  % FFT size in eta
 [W2DFT_original, W2DFT_con] = W2DFT_4Dcon(signal, NFFT_omega, NFFT_eta); 
 
 %% plotting the results
-T    = size(signal,2);
-R    = size(signal,1);
+T    = size(signal,1);
+R    = size(signal,2);
 t    = 1:T;
 r    = 1:R;
-cut_t = ceil(T/2);
-cut_r = ceil(R/2);
+cut_r = ceil(T/2);
+cut_t = ceil(R/2);
 cut_omega = NFFT_omega/2;
 cut_eta = NFFT_eta/2;
 omega_bins = linspace(-0.5, 0.5, NFFT_omega);
@@ -117,3 +117,4 @@ c.Label.String = 'Magnitude [dB]';
 c.Label.Interpreter = 'latex';
 c.TickLabelInterpreter = 'latex';
 clim([max(max(db(abs(W2DFT_concentrated_distribution(cut_omega,cut_eta,:,:)),"power"))) - threshold, max(max(db(abs(W2DFT_concentrated_distribution(cut_omega,cut_eta,:,:)),"power")))])
+
