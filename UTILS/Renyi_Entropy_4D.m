@@ -1,5 +1,4 @@
 function Ren = Renyi_Entropy_4D(W2DFT,t,r,w,n,alpha)
-%	Ren=renyi_entropy(TFR,t,f,alpha) calculates Renyi entropy from 2-D TFR
 %   
 %   Inputs:
 %	W2DFT : (M,N,K,L) 4-D W2DFT function.
@@ -45,5 +44,6 @@ if alpha == 1 % limit case case: Shannon entropy
 else % Renyi entropy
     Ren=1/(1-alpha)*log2(trapz(w,trapz(n,trapz(t,trapz(r,W2DFT.^alpha,4),3),2))+eps);
 end
+
 
 
